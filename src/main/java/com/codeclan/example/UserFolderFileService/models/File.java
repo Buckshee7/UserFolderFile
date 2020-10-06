@@ -12,7 +12,7 @@ public class File {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="name)")
+    @Column(name="name")
     private String name;
 
     @Column(name="extension")
@@ -21,15 +21,16 @@ public class File {
     @Column(name="size")
     private Integer size;
 
-    @JsonIgnoreProperties({"file"})
+    @JsonIgnoreProperties({"files"})
     @ManyToOne
     @JoinColumn(name = "folder_id")
     private Folder folder;
 
-    public File(String name, String extension, Integer size) {
+    public File(String name, String extension, Integer size, Folder folder) {
         this.name = name;
         this.extension = extension;
         this.size = size;
+        this.folder = folder;
     }
 
     public File() {

@@ -22,12 +22,13 @@ public class Folder {
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 
-    @JsonIgnoreProperties({"user"})
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"folder"})
+    @OneToMany(mappedBy = "folder", fetch = FetchType.LAZY)
     private List<File> files;
 
-    public Folder(String title) {
+    public Folder(String title, User user) {
         this.title = title;
+        this.user = user;
         this.files = new ArrayList<>();
     }
 
