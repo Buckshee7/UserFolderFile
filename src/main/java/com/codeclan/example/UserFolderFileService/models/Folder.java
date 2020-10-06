@@ -14,6 +14,9 @@ public class Folder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "title")
+    private String title;
+
     @JsonIgnoreProperties({"folders"})
     @ManyToOne
     @JoinColumn(name="user_id", nullable = false)
@@ -23,12 +26,20 @@ public class Folder {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<File> files;
 
-    public Folder(User user) {
-        this.user = user;
+    public Folder(String title) {
+        this.title = title;
         this.files = new ArrayList<>();
     }
 
     public Folder() {
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Long getId() {
@@ -55,7 +66,7 @@ public class Folder {
         this.files = files;
     }
 
-    private void addFile(File file){
+    public void addFile(File file){
         this.files.add(file);
     }
 }
